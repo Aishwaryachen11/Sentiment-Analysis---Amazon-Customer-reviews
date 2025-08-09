@@ -1,10 +1,10 @@
-# 📊 Sentiment Analysis on Amazon Fine Food Reviews
+# Sentiment Analysis on Amazon Fine Food Reviews
 
-## 📌 Overview
+## Overview
 This project performs **sentiment analysis** on the Amazon Fine Food Reviews dataset to classify reviews into **Positive**, **Negative**, or **Neutral** categories.  
 It includes **data preprocessing, feature extraction, model training, evaluation, explainability, and live prediction demos**.
 
-## 🧠 Key Features
+## Key Features
 - **Dataset:** Amazon Fine Food Reviews (`Reviews.csv`)
 - **Label mapping:**
   - 1–2 stars → Negative
@@ -18,7 +18,7 @@ It includes **data preprocessing, feature extraction, model training, evaluation
 - **Explainability:** SHAP bar plot of top impactful words
 - **Inference:** Predict sentiment & probability for new reviews
 
-## 🧹 Preprocessing
+## Preprocessing
 Before training our sentiment analysis models, we performed a structured text-cleaning and dataset-preparation process to ensure consistent, high-quality inputs and balanced class representation.  
 
 ### Steps Taken
@@ -74,7 +74,7 @@ We trained two baseline machine learning models using the TF-IDF features: **Log
 - Very high performance for the **Positive** class.
 - Neutral sentiment detection remains challenging (lower precision & recall).
 - Balanced weight helps boost recall for underrepresented classes.
-- 
+  
 ### 2. Multinomial Naive Bayes (TF-IDF)
 - **Reasoning:** Naive Bayes is a simple yet effective probabilistic classifier for text data.
 - Works well with term frequency features like TF-IDF, especially for linearly separable text data.
@@ -90,7 +90,7 @@ We trained two baseline machine learning models using the TF-IDF features: **Log
 - Precision for Negative reviews is higher than Logistic Regression, but recall is worse.
 - The assumption of feature independence may limit Naive Bayes in nuanced sentiment tasks.
 
-### 💡 Summary
+### Summary
 - **Best overall performer:** Logistic Regression — better balance between precision and recall across classes.
 - **Naive Bayes** — faster and simpler, but weaker on Neutral sentiment.
 - Both models achieve ~85% accuracy, but class-level metrics highlight where improvements are needed.
