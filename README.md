@@ -4,8 +4,11 @@
 This project performs **sentiment analysis** on the Amazon Fine Food Reviews dataset to classify reviews into **Positive**, **Negative**, or **Neutral** categories.  
 It includes **data preprocessing, feature extraction, model training, evaluation, explainability, and live prediction demos**.
 
+Use this link to access the notebook in Google Colab:  
+[Open Colab Notebook](https://github.com/Aishwaryachen11/Sentiment-Analysis---Amazon-Customer-reviews/blob/main/Sentiment_Analysis_Customer_reviews.ipynb)
+
 ## Key Features
-- **Dataset:** Amazon Fine Food Reviews (`Reviews.csv`)
+- **Dataset:**  [Amazon Fine Food Reviews](https://www.kaggle.com/datasets/snap/amazon-fine-food-reviews).   
 - **Label mapping:**
   - 1–2 stars → Negative
   - 3 stars → Neutral
@@ -90,6 +93,17 @@ We trained two baseline machine learning models using the TF-IDF features: **Log
 - Precision for Negative reviews is higher than Logistic Regression, but recall is worse.
 - The assumption of feature independence may limit Naive Bayes in nuanced sentiment tasks.
 
+| Model                              | Accuracy | Precision (Negative) | Recall (Negative) | F1 (Negative) | Precision (Neutral) | Recall (Neutral) | F1 (Neutral) | Precision (Positive) | Recall (Positive) | F1 (Positive) | Macro Avg F1 | Weighted Avg F1 |
+|------------------------------------|----------|----------------------|-------------------|---------------|---------------------|------------------|--------------|----------------------|-------------------|---------------|--------------|-----------------|
+| Logistic Regression (Balanced)    | 0.850    | 0.69                 | 0.82              | 0.75          | 0.38                | 0.62             | 0.47         | 0.97                 | 0.88              | 0.92          | 0.71         | 0.86            |
+| Multinomial Naive Bayes (TF-IDF)   | 0.849    | 0.82                 | 0.50              | 0.62          | 0.69                | 0.07             | 0.13         | 0.85                 | 0.99              | 0.92          | 0.56         | 0.81            |
+
+**Observations:**
+- Logistic Regression provides **better recall for the Neutral class**, but still struggles compared to Positive/Negative.
+- Naive Bayes achieves very high recall for **Positive reviews**, but performs poorly for **Neutral**.
+- Both models achieve similar **overall accuracy (~85%)**.
+
+
 ### Summary
 - **Best overall performer:** Logistic Regression — better balance between precision and recall across classes.
 - **Naive Bayes** — faster and simpler, but weaker on Neutral sentiment.
@@ -104,6 +118,10 @@ We generated a confusion matrix for both models to visualize misclassifications.
 - **Multinomial Naive Bayes**:
     - Overwhelming bias toward classifying reviews as Positive.
     - Very low recall for Neutral sentiment (most Neutral reviews classified as Positive).
+
+<img src="https://github.com/Aishwaryachen11/Sentiment-Analysis---Amazon-Customer-reviews/blob/main/Confusion%20matrix%20-%20Log.png" width="550"/>
+<img src="https://github.com/Aishwaryachen11/Sentiment-Analysis---Amazon-Customer-reviews/blob/main/Confusion%20Matrix%20-%20Multinomial%20NB.png" width="550"/>
+
 ### 2. Top Features from Logistic Regression
 We extracted the top **positive** and **negative** words for each class based on model coefficients.  
 This helps explain what textual patterns the model relies on for predictions.
@@ -139,14 +157,14 @@ This helps explain what textual patterns the model relies on for predictions.
 - Negative sentiment is linked to explicit dissatisfaction (“worst”, “terrible”, “disappointing”).
 - Neutral sentiment often comes from moderate language or mixed feedback (“average”, “okay”, “nothing special”).
 
-## 🔍 SHAP Analysis – Explaining Logistic Regression Predictions
+## SHAP Analysis – Explaining Logistic Regression Predictions
 We used **SHAP (SHapley Additive exPlanations)** to interpret the Logistic Regression model trained on **TF-IDF features**.  
 Instead of a full force plot or summary with all features, we generated a **bar plot** showing the average absolute SHAP value for the top words across the dataset.  
 ### Purpose
 - Identify which words have the **largest impact** on the model’s predictions.
 - Translate technical model outputs into **business-friendly insights**.
 ### Results – Bar Plot
-![SHAP Bar Plot](SHAP-Barplot.png)
+<img src="https://github.com/Aishwaryachen11/Sentiment-Analysis---Amazon-Customer-reviews/blob/main/download.png" width="550"/>
 
 **Interpretation:**
 - Words like *"great"*, *"delicious"*, and *"love"* have a strong **positive influence** toward predicting Positive sentiment.
